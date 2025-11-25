@@ -3,6 +3,8 @@ import { HelloController } from './hello.controller';
 import { HelloService } from './hello.service';
 
 @Module({
+  imports: [], //Imports other modules if needed
+  exports: [],
   controllers: [HelloController],
   providers: [HelloService],
 })
