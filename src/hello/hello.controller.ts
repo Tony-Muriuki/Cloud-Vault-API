@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { HelloService } from './hello.service';
 
 //Express
@@ -10,8 +10,19 @@ import { HelloService } from './hello.service';
 export class HelloController {
   //Dependency Injection Implementation: Injecting Hello Service To Our Controller
   constructor(private readonly helloService: HelloService) {}
-  @Get('first-route')
+  @Get()
   getHello(): string {
     return this.helloService.getHello();
+  }
+
+  @Get('user/:name')
+  getHelloWithName(@Param('name') name: string): string {
+    return this.helloService.getHelloWithName(name);
+  }
+
+  //3 hello/query?name=John
+  @Get('query')
+  getHelloWithQuery(@Query('name') name: string): string {
+    return this.helloService.getHelloWithName(name ?? 'World');
   }
 }
